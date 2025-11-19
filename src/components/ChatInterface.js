@@ -27,6 +27,7 @@ function ChatInterface() {
                 // 필요하다면 유지, n8n Webhook 설정에 따라 선택사항
                 // 'X-Customer-Id': DEMO_CUSTOMER_ID 
             },
+            credentials: 'omit', // CORS 문제 방지
             body: JSON.stringify({
                 // [수정 2] n8n 워크플로우 변수명과 일치시켰습니다. (message -> chatInput)
                 chatInput: inputText,
