@@ -3,9 +3,7 @@ import MessageList from './MessageList';
 import MessageInput from './MessageInput';
 import './Chat.css'; 
 
-// [수정 1] n8n 화면의 'Webhook3' 노드에서 'Production URL'을 복사해서 아래에 붙여넣으세요.
-// (Test URL이 아닌 Production URL이어야 배포된 사이트에서 작동합니다)
-const CHAT_WEBHOOK_URL = "여기에_n8n_Production_URL을_붙여넣으세요"; 
+const CHAT_WEBHOOK_URL = "https://primary-production-b57a.up.railway.app/webhook/f2bddafa-e050-40c6-8a32-697c7dce9527"; 
 
 const DEMO_CUSTOMER_ID = 'customer-1234';
 
