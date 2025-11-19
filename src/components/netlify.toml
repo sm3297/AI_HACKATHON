@@ -1,0 +1,22 @@
+# netlify.toml (프로젝트 루트에 저장)
+
+# 빌드 설정 (React 기본값)
+[build]
+  command = "npm run build"  # 또는 yarn build
+  publish = "build"  # 빌드 후 배포할 폴더 (React 기본)
+
+# 리다이렉트 (React Router 새로고침 404 방지)
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# CORS 헤더 설정 (모든 경로에 적용)
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"  # 테스트용, 프로덕션은 도메인 지정 (e.g. "https://yourdomain.com")
+    Access-Control-Allow-Methods = "GET, POST, PUT, DELETE, OPTIONS"
+    Access-Control-Allow-Headers = "Content-Type, Authorization, X-Requested-With"
+    Cross-Origin-Embedder-Policy = "unsafe-none"  # postMessage 에러 우회 (테스트용)
+    Cross-Origin-Opener-Policy = "same-origin"   # 팝업/iframe 통신 허용
