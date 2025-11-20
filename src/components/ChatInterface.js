@@ -92,7 +92,7 @@ import MessageList from './MessageList';
 import MessageInput from './MessageInput';
 import './Chat.css'; // 챗봇 전용 CSS
 
-const CHAT_WEBHOOK_URL = "https://primary-production-b57a.up.railway.app/webhook/f2bddafa-e050-40c6-8a32-697c7dce9527"; 
+const N8N_WEBHOOK_URL = '/api/chat';
 
 // [중요] 로그인 후에는 고객 ID를 보내야 하므로 임시 ID를 사용합니다.
 const DEMO_CUSTOMER_ID = 'customer-1234';
