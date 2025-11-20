@@ -158,8 +158,8 @@
 // export default MessageList;
 
 import React, { useEffect, useRef } from 'react';
-import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
+import ReactMarkdown from 'react-markdown'; 
+import remarkGfm from 'remark-gfm';         
 
 function MessageList({ messages, isLoading }) {
   const endOfMessagesRef = useRef(null);
