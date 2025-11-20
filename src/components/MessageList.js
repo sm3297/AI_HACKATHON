@@ -75,14 +75,95 @@
 // export default MessageList;
 
 
+// import React, { useEffect, useRef } from 'react';
+// import ReactMarkdown from 'react-markdown';
+// import remarkGfm from 'remark-gfm';
+// import remarkMath from 'remark-math'; // LaTeX 수식 지원
+// import rehypeKatex from 'rehype-katex'; // LaTeX 렌더링
+// import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+// import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism'; // 코드 테마
+// import 'katex/dist/katex.min.css'; // KaTeX CSS 필요
+
+// function MessageList({ messages, isLoading }) {
+//   const endOfMessagesRef = useRef(null);
+
+//   useEffect(() => {
+//     endOfMessagesRef.current?.scrollIntoView({ behavior: 'smooth' });
+//   }, [messages, isLoading]);
+
+//   return (
+//     <div className="message-list">
+//       {messages.map((msg, index) => (
+//         <div key={index} className={`message-bubble ${msg.sender}`}>
+//           {msg.sender === 'bot' ? (
+//             <ReactMarkdown
+//               remarkPlugins={[remarkGfm, remarkMath]} // 테이블, 리스트, 수식 지원
+//               rehypePlugins={[rehypeKatex]} // LaTeX 렌더링
+//               components={{
+//                 // 링크 새 창에서 열기
+//                 a: ({ node, ...props }) => (
+//                   <a target="_blank" rel="noopener noreferrer" {...props} />
+//                 ),
+//                 // 코드 블록 하이라이팅
+//                 code({ node, inline, className, children, ...props }) {
+//                   const match = /language-(\w+)/.exec(className || '');
+//                   return !inline && match ? (
+//                     <SyntaxHighlighter
+//                       style={vscDarkPlus}
+//                       language={match[1]}
+//                       PreTag="div"
+//                       {...props}
+//                     >
+//                       {String(children).replace(/\n$/, '')}
+//                     </SyntaxHighlighter>
+//                   ) : (
+//                     <code className={className} {...props}>
+//                       {children}
+//                     </code>
+//                   );
+//                 },
+//                 // 표 스타일링
+//                 table: ({ node, ...props }) => (
+//                   <div className="table-wrapper">
+//                     <table {...props} />
+//                   </div>
+//                 ),
+//               }}
+//             >
+//               {msg.text}
+//             </ReactMarkdown>
+//           ) : (
+//             // 사용자 메시지도 Markdown 적용 (선택사항)
+//             <ReactMarkdown
+//               remarkPlugins={[remarkGfm, remarkMath]}
+//               rehypePlugins={[rehypeKatex]}
+//             >
+//               {msg.text}
+//             </ReactMarkdown>
+//           )}
+//         </div>
+//       ))}
+//       {isLoading && (
+//         <div className="message-bubble bot loading">
+//           <span>.</span>
+//           <span>.</span>
+//           <span>.</span>
+//         </div>
+//       )}
+//       <div ref={endOfMessagesRef} />
+//     </div>
+//   );
+// }
+
+// export default MessageList;
+
+
 import React, { useEffect, useRef } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import remarkMath from 'remark-math'; // LaTeX 수식 지원
-import rehypeKatex from 'rehype-katex'; // LaTeX 렌더링
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism'; // 코드 테마
-import 'katex/dist/katex.min.css'; // KaTeX CSS 필요
+import remarkMath from 'remark-math';
+import rehypeKatex from 'rehype-katex';
+import 'katex/dist/katex.min.css';
 
 function MessageList({ messages, isLoading }) {
   const endOfMessagesRef = useRef(null);
@@ -96,50 +177,30 @@ function MessageList({ messages, isLoading }) {
       {messages.map((msg, index) => (
         <div key={index} className={`message-bubble ${msg.sender}`}>
           {msg.sender === 'bot' ? (
-            <ReactMarkdown
-              remarkPlugins={[remarkGfm, remarkMath]} // 테이블, 리스트, 수식 지원
-              rehypePlugins={[rehypeKatex]} // LaTeX 렌더링
-              components={{
-                // 링크 새 창에서 열기
-                a: ({ node, ...props }) => (
-                  <a target="_blank" rel="noopener noreferrer" {...props} />
-                ),
-                // 코드 블록 하이라이팅
-                code({ node, inline, className, children, ...props }) {
-                  const match = /language-(\w+)/.exec(className || '');
-                  return !inline && match ? (
-                    <SyntaxHighlighter
-                      style={vscDarkPlus}
-                      language={match[1]}
-                      PreTag="div"
-                      {...props}
-                    >
-                      {String(children).replace(/\n$/, '')}
-                    </SyntaxHighlighter>
-                  ) : (
-                    <code className={className} {...props}>
-                      {children}
-                    </code>
-                  );
-                },
-                // 표 스타일링
-                table: ({ node, ...props }) => (
-                  <div className="table-wrapper">
-                    <table {...props} />
-                  </div>
-                ),
-              }}
-            >
-              {msg.text}
-            </ReactMarkdown>
+            <div className="markdown-content">
+              <ReactMarkdown
+                remarkPlugins={[remarkGfm, remarkMath]}
+                rehypePlugins={[rehypeKatex]}
+                components={{
+                  a: ({ node, ...props }) => (
+                    <a target="_blank" rel="noopener noreferrer" {...props} />
+                  ),
+                  p: ({ node, ...props }) => <p {...props} />,
+                  strong: ({ node, ...props }) => <strong {...props} />,
+                  em: ({ node, ...props }) => <em {...props} />,
+                  ul: ({ node, ...props }) => <ul {...props} />,
+                  ol: ({ node, ...props }) => <ol {...props} />,
+                  li: ({ node, ...props }) => <li {...props} />,
+                  code: ({ node, inline, ...props }) => 
+                    inline ? <code {...props} /> : <pre><code {...props} /></pre>,
+                  blockquote: ({ node, ...props }) => <blockquote {...props} />,
+                }}
+              >
+                {msg.text}
+              </ReactMarkdown>
+            </div>
           ) : (
-            // 사용자 메시지도 Markdown 적용 (선택사항)
-            <ReactMarkdown
-              remarkPlugins={[remarkGfm, remarkMath]}
-              rehypePlugins={[rehypeKatex]}
-            >
-              {msg.text}
-            </ReactMarkdown>
+            <div className="user-message">{msg.text}</div>
           )}
         </div>
       ))}

@@ -33,23 +33,203 @@
   cursor: pointer;
 }
 
-/* 마크다운 내부 스타일 정리 */
-.message-bubble.bot p {
-  margin: 5px 0; /* 문단 간격 조절 */
+/* 메시지 버블 기본 스타일 */
+.message-bubble {
+  margin: 10px 0;
+  padding: 12px 16px;
+  border-radius: 12px;
+  max-width: 80%;
 }
 
-.message-bubble.bot ul, 
-.message-bubble.bot ol {
-  margin: 5px 0;
-  padding-left: 20px; /* 리스트 들여쓰기 */
+.message-bubble.user {
+  background-color: #007bff;
+  color: white;
+  margin-left: auto;
+  text-align: right;
 }
 
-.message-bubble.bot li {
-  margin-bottom: 2px;
+.message-bubble.bot {
+  background-color: #f1f3f5;
+  color: #212529;
+  margin-right: auto;
+  text-align: left;
 }
 
-/* 굵은 글씨 강조 색상 (선택사항) */
-.message-bubble.bot strong {
-  color: #0056b3; 
+/* 마크다운 컨텐츠 래퍼 */
+.markdown-content {
+  line-height: 1.6;
+}
+
+/* 문단 스타일 */
+.markdown-content p {
+  margin: 0.5em 0;
+  line-height: 1.6;
+}
+
+.markdown-content p:first-child {
+  margin-top: 0;
+}
+
+.markdown-content p:last-child {
+  margin-bottom: 0;
+}
+
+/* 강조 텍스트 */
+.markdown-content strong {
+  color: #0056b3;
   font-weight: 700;
+}
+
+.markdown-content em {
+  font-style: italic;
+  color: #495057;
+}
+
+/* 리스트 스타일 */
+.markdown-content ul,
+.markdown-content ol {
+  margin: 0.8em 0;
+  padding-left: 24px;
+}
+
+.markdown-content ul {
+  list-style-type: disc;
+}
+
+.markdown-content ol {
+  list-style-type: decimal;
+}
+
+.markdown-content li {
+  margin: 0.3em 0;
+  line-height: 1.6;
+}
+
+.markdown-content li > p {
+  margin: 0.2em 0;
+}
+
+/* 중첩 리스트 */
+.markdown-content ul ul,
+.markdown-content ol ol,
+.markdown-content ul ol,
+.markdown-content ol ul {
+  margin: 0.3em 0;
+}
+
+/* 인라인 코드 */
+.markdown-content code {
+  background-color: #e9ecef;
+  color: #d63384;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: 'Courier New', 'Consolas', monospace;
+  font-size: 0.9em;
+}
+
+/* 코드 블록 */
+.markdown-content pre {
+  background-color: #2d2d2d;
+  color: #f8f8f2;
+  padding: 12px;
+  border-radius: 6px;
+  overflow-x: auto;
+  margin: 1em 0;
+}
+
+.markdown-content pre code {
+  background-color: transparent;
+  color: inherit;
+  padding: 0;
+  font-size: 0.9em;
+  line-height: 1.5;
+}
+
+/* 인용구 */
+.markdown-content blockquote {
+  border-left: 4px solid #0056b3;
+  padding-left: 16px;
+  margin: 1em 0;
+  color: #495057;
+  font-style: italic;
+}
+
+/* 링크 */
+.markdown-content a {
+  color: #0056b3;
+  text-decoration: none;
+  border-bottom: 1px solid #0056b3;
+}
+
+.markdown-content a:hover {
+  color: #003d82;
+  border-bottom-color: #003d82;
+}
+
+/* 수평선 */
+.markdown-content hr {
+  border: none;
+  border-top: 1px solid #dee2e6;
+  margin: 1.5em 0;
+}
+
+/* 테이블 */
+.markdown-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1em 0;
+}
+
+.markdown-content th,
+.markdown-content td {
+  border: 1px solid #dee2e6;
+  padding: 8px 12px;
+  text-align: left;
+}
+
+.markdown-content th {
+  background-color: #e9ecef;
+  font-weight: 600;
+}
+
+.markdown-content tr:nth-child(even) {
+  background-color: #f8f9fa;
+}
+
+/* LaTeX 수식 */
+.markdown-content .katex {
+  font-size: 1.1em;
+}
+
+.markdown-content .katex-display {
+  margin: 1em 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+/* 로딩 애니메이션 */
+.message-bubble.loading {
+  display: flex;
+  gap: 5px;
+}
+
+.message-bubble.loading span {
+  animation: bounce 1.4s infinite ease-in-out both;
+}
+
+.message-bubble.loading span:nth-child(1) {
+  animation-delay: -0.32s;
+}
+
+.message-bubble.loading span:nth-child(2) {
+  animation-delay: -0.16s;
+}
+
+@keyframes bounce {
+  0%, 80%, 100% {
+    transform: scale(0);
+  }
+  40% {
+    transform: scale(1);
+  }
 }
