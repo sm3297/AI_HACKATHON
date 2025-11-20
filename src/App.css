@@ -32,3 +32,24 @@
   background-color: #eee;
   cursor: pointer;
 }
+
+/* 마크다운 내부 스타일 정리 */
+.message-bubble.bot p {
+  margin: 5px 0; /* 문단 간격 조절 */
+}
+
+.message-bubble.bot ul, 
+.message-bubble.bot ol {
+  margin: 5px 0;
+  padding-left: 20px; /* 리스트 들여쓰기 */
+}
+
+.message-bubble.bot li {
+  margin-bottom: 2px;
+}
+
+/* 굵은 글씨 강조 색상 (선택사항) */
+.message-bubble.bot strong {
+  color: #0056b3; 
+  font-weight: 700;
+}
