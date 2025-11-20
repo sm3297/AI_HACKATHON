@@ -157,13 +157,9 @@
 
 // export default MessageList;
 
-
 import React, { useEffect, useRef } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import remarkMath from 'remark-math';
-import rehypeKatex from 'rehype-katex';
-import 'katex/dist/katex.min.css';
 
 function MessageList({ messages, isLoading }) {
   const endOfMessagesRef = useRef(null);
@@ -179,8 +175,7 @@ function MessageList({ messages, isLoading }) {
           {msg.sender === 'bot' ? (
             <div className="markdown-content">
               <ReactMarkdown
-                remarkPlugins={[remarkGfm, remarkMath]}
-                rehypePlugins={[rehypeKatex]}
+                remarkPlugins={[remarkGfm]}
                 components={{
                   a: ({ node, ...props }) => (
                     <a target="_blank" rel="noopener noreferrer" {...props} />
