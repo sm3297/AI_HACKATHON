@@ -82,7 +82,7 @@ import remarkMath from 'remark-math'; // LaTeX 수식 지원
 import rehypeKatex from 'rehype-katex'; // LaTeX 렌더링
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism'; // 코드 테마
-import 'katex/dist/katex.min.css'; // KaTeX CSS 필수
+import 'katex/dist/katex.min.css'; // KaTeX CSS 필요
 
 function MessageList({ messages, isLoading }) {
   const endOfMessagesRef = useRef(null);
