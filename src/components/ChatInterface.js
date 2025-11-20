@@ -181,7 +181,7 @@ import './Chat.css';
 
 const CHAT_WEBHOOK_URL = "https://primary-production-b57a.up.railway.app/webhook/f2bddafa-e050-40c6-8a32-697c7dce9527"; 
 
-const DEMO_CUSTOMER_ID = 'customer-1234';
+const DEMO_CUSTOMER_ID = '홍길동20251140390';
 
 function ChatInterface() {
   const [messages, setMessages] = useState([
